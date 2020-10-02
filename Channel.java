@@ -4,7 +4,7 @@ public class Channel {
 
 
 	private final double STAY_SUCCESS;
-	private final double SUCCESS_FAILURE;
+	private final double STAY_FAILURE;
 	private Random random;
 	private boolean currentState;
 	private int successes = 0;
@@ -13,7 +13,7 @@ public class Channel {
 		random = new Random(randomseed);
 		random.nextDouble();
 		STAY_SUCCESS = random.nextDouble();
-		SUCCESS_FAILURE = random.nextDouble();
+		STAY_FAILURE = random.nextDouble();
 		currentState = true;
 	}
 
@@ -25,8 +25,8 @@ public class Channel {
 		return STAY_SUCCESS;
 	}
 
-	public double getSUCCESS_FAILURE() {
-		return SUCCESS_FAILURE;
+	public double getSTAY_FAILURE() {
+		return STAY_FAILURE;
 	}
 	
 	public boolean getState()
@@ -39,33 +39,20 @@ public class Channel {
 		double chance = random.nextDouble();
 		if(currentState)
 		{
-			if(chance > STAY_SUCCESS)
+			if(chance < STAY_SUCCESS)
 			{
-				chance = random.nextDouble();
-				if(chance < SUCCESS_FAILURE)
-				{
-					currentState = false;
-				}
-				else
-				{
-					successes ++;	
-				}
+				successes++;
 			}
 			else
 			{
-				successes ++;
+				currentState = false;
 			}
 		}
 		else
 		{
-			if(chance > 1 - STAY_SUCCESS)
+			if(chance > STAY_FAILURE)
 			{
-				chance = random.nextDouble();
-				if(chance < 1 - SUCCESS_FAILURE)
-				{
-					currentState = true;
-					successes ++;
-				}
+				currentState = true;
 			}
 		}
 		
