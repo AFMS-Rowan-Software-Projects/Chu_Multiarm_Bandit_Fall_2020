@@ -32,7 +32,7 @@ public class Driver {
 		
 		for(int i = 0; i < numChannels; i++)
 		{
-			allChannels[i] = new Channel(rand.nextInt(100));
+			allChannels[i] = new Channel(rand.nextDouble(), rand.nextDouble());
 			currentStates[iterator] = true;
 			iterator++;
 		}
