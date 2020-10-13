@@ -7,7 +7,7 @@ public class Channel {
 	private double stayFailure;
 	private boolean currentState;
 	private int successes = 0;
-	
+	private Random random = new Random();
 	public Channel(double staySuccess, double stayFailure) 
 	{
 		this.staySuccess = staySuccess;
