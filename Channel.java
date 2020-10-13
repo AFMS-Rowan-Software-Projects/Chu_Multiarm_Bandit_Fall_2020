@@ -1,8 +1,10 @@
+import java.util.Random;
+
 public class Channel {
 
 
 	private double staySuccess;
-	private double staySuccess;
+	private double stayFailure;
 	private boolean currentState;
 	private int successes = 0;
 	
