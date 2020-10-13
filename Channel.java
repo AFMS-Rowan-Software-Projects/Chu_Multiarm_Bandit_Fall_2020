@@ -1,41 +1,41 @@
-import java.util.Random;
-
 public class Channel {
 
 
-	private double STAY_SUCCESS;
-	private double STAY_FAILURE;
-	private Random random;
+	private double staySuccess;
+	private double staySuccess;
 	private boolean currentState;
 	private int successes = 0;
 	
-	public Channel(int randomseed) 
+	public Channel(double staySuccess, double stayFailure) 
 	{
-		random = new Random(randomseed);
-		random.nextDouble();
-		STAY_SUCCESS = random.nextDouble();
-		STAY_FAILURE = random.nextDouble();
+		this.staySuccess = staySuccess;
+		this.stayFailure = stayFailure;
 		currentState = true;
 	}
 
-	public int getSuccesses() {
+	public int getSuccesses() 
+	{
 		return successes;
 	}
 
-	public double getSTAY_SUCCESS() {
-		return STAY_SUCCESS;
+	public double getStaySuccess() 
+	{
+		return staySuccess;
 	}
 
-	public double getSTAY_FAILURE() {
-		return STAY_FAILURE;
+	public double getStayFailure() 
+	{
+		return stayFailure;
 	}
 	
-	public void setSTAY_SUCCESS(double ss) {
-		this.STAY_SUCCESS = ss;
+	public void setStaySuccess(double staySuccess) 
+	{
+		this.staySuccess = staySuccess;
 	}
 	
-	public void setSTAY_FAILURE(double sf) {
-		this.STAY_FAILURE = sf;
+	public void setStayFailure(double stayFailure) 
+	{
+		this.stayFailure = stayFailure;
 	}
 	
 	public boolean getState()
@@ -48,7 +48,7 @@ public class Channel {
 		double chance = random.nextDouble();
 		if(currentState)
 		{
-			if(chance < STAY_SUCCESS)
+			if(chance < staySuccess)
 			{
 				successes++;
 			}
@@ -59,7 +59,7 @@ public class Channel {
 		}
 		else
 		{
-			if(chance > STAY_FAILURE)
+			if(chance > stayFailure)
 			{
 				currentState = true;
 			}
