@@ -3,11 +3,12 @@ import java.util.Random;
 public class Channel {
 
 
-	private final double STAY_SUCCESS;
-	private final double STAY_FAILURE;
+	private double STAY_SUCCESS;
+	private double STAY_FAILURE;
 	private Random random;
 	private boolean currentState;
 	private int successes = 0;
+	
 	public Channel(int randomseed) 
 	{
 		random = new Random(randomseed);
@@ -27,6 +28,14 @@ public class Channel {
 
 	public double getSTAY_FAILURE() {
 		return STAY_FAILURE;
+	}
+	
+	public void setSTAY_SUCCESS(double ss) {
+		this.STAY_SUCCESS = ss;
+	}
+	
+	public void setSTAY_FAILURE(double sf) {
+		this.STAY_FAILURE = sf;
 	}
 	
 	public boolean getState()
@@ -60,3 +69,4 @@ public class Channel {
 	}
 
 }
+
