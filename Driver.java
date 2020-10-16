@@ -1,131 +1,151 @@
-
 import java.util.Random;
 import java.util.Scanner;
 
 public class Driver {
 
-        //Declare static variables to be used in markov chain algorithms
-        private static Scanner sc = new Scanner(System.in);
-        private static Channel[] allChannels;
-        private static boolean[] currentStates;
-        private static int channelsRemaining;
-        private static Random rand;
-        private static int totalRuns = 0;
-        private static int trials = 100;
+	//Declare static variables to be used in markov chain algorithms
+	private static Scanner sc = new Scanner(System.in);
+	private static Random rand;
+	private static Channel[] simulatedNetwork;
+	private static int numTrials;
 
-        public static void main(String[] args)
-        {
-                //Prompt user for number of channels
-                System.out.println("Enter the number of channels");
-                int numChannels = sc.nextInt();
+	public static void main(String[] args)
+	{
+		/* 
+		 * Generates Network Based off User Input
+		 */
+		
+		System.out.print("Generate Channels Based On a Random Seed? (true/false): ");
+		boolean randomGeneration = sc.nextBoolean();
+		
+		// Generates a network based on a random seed.
+		if (randomGeneration)
+		{
+			System.out.print("Enter a seed for this trial: ");
+			rand = new Random(sc.nextLong());
+			
+			//Prompt user for number of channels
+			System.out.print("Enter the number of channels to generate: ");
+			int numChannels = sc.nextInt();
+			
+			simulatedNetwork = new Channel[numChannels];
+			
+			for (int i = 0; i < numChannels; i++)
+			{
+				simulatedNetwork[i] = new Channel(rand.nextDouble(), rand.nextDouble());
+			}
+		}
+		// Generates network as described by user.
+		else
+		{
+			System.out.print("Use rigged 2 state environment? (true/false): ");
+			boolean rigged = sc.nextBoolean();
+			
+			if (rigged)
+			{
+				simulatedNetwork = new Channel[2];
+				simulatedNetwork[0] = new Channel(0.95, .05);
+				simulatedNetwork[1] = new Channel(.05, .95);
+			}
+			else
+			{
+				/* Takes a String of the format described below, converting it to a simulated network.
+				 * "StaySuccess1,StayFailure1,StaySuccess2,StayFailure2,...,StaySuccessN,StayFailureN"
+				 * Ex: ".95,.05,.05,.95" 
+				 *   Channel 1: .95 Success Rate from Success State		.05 Failure Rate from Failure State
+				 *   Channel 2: .05 Success Rate from Success State		.95 Failure Rate from Failure State
+				 */
+				System.out.print("Enter Simulated Network String: ");
+				String[] input = sc.next().split(","); 
+				
+				simulatedNetwork = new Channel[input.length / 2];
+				for (int i = 0; i < input.length / 2; i++)
+				{
+					simulatedNetwork[i] = new Channel(Double.parseDouble(input[i * 2]), Double.parseDouble(input[i * 2 + 1]));
+				}
+			}
+			
+		}
+		
+		// Present only for debug, prints out network after it is generated.
+		System.out.println("Simulated Network: ");
+		for (int i = 0; i < simulatedNetwork.length; i++)
+		{
+			System.out.println("Channel " + i + ":\tStay Success:  " + simulatedNetwork[i].getStaySuccess() + 
+					"\tStay Failure:  " + simulatedNetwork[i].getStayFailure());
+		}
+		
+		// Sets number of channels to ping over the trial.
+		System.out.print("Enter number of trials: ");
+		numTrials = sc.nextInt();
+		
+		// Keeps track of overall success rate of each algorithm.
+		int numSuccesses = 0;
+		int numPings = 0;
+		
+		
+		/* Naive / Brute Force Algorithm
+		 * Communicates over each channel pingsPerChannel times, performs rest of pings on the channel with the highest 
+		 * success rate.
+		 */
+		
+		// Brute Force Algorithm Record Keeping
+		int pingsPerChannel = 100;
+		int currChannel = 0;
+		int currNumPings = 0;
+		int currNumSuccess = 0;
+		int bestChannel = 0;
+		double bestRate = 0.0;
+		
+		for (int i = 0; i < numTrials; i++)
+		{
+			// Exploration Phase
+			if (currChannel < simulatedNetwork.length)
+			{
+				// Pings the current channel, performs appropriate record-keeping
+				if (simulatedNetwork[currChannel].ping())
+				{
+					numSuccesses++;
+					currNumSuccess++;
+				}
+				currNumPings++;
+				
+				// Switches to the next channel if we reach pingsPerChannel, performs appropriate record-keeping
+				if (currNumPings == pingsPerChannel)
+				{
+					double currRate = (double) currNumSuccess / pingsPerChannel;
+					
+					// Debug Info
+					System.out.println("Channel " + currChannel + "\tEstimated Success Rate: " + currRate);
+					
+					if (currRate > bestRate)
+					{
+						bestRate = currRate;
+						bestChannel = currChannel;
+					}
+					
+					currChannel++;
+					currNumPings = 0; 
+					currNumSuccess = 0;
+				}
+			}
+			// Exploitation Phase
+			else
+			{
+				if (simulatedNetwork[bestChannel].ping())
+				{
+					numSuccesses++;
+				}
+			}
+			
+			numPings++;
+		}
+		
+		// Debug Info
+		System.out.println("Best Channel Found Was Channel " + bestChannel + "\tEstimated Success Rate: " + bestRate);
+		
+		System.out.println("Final Success Rate: " + (double) numSuccesses / numPings);
+		
+	}
 
-                //Keep all arrays this size
-                allChannels = new Channel[numChannels];
-                currentStates = new boolean[numChannels];
-
-                //Get random seed for repeatability
-                System.out.println("Enter the randomseed number");
-                int randomseed = sc.nextInt();
-                rand = new Random(randomseed);
-                int iterator = 0;
-
-                //Declare all channels with another randomseed randomly generated by this randomseed
-
-                for(int i = 0; i < numChannels; i++)
-                {
-                        allChannels[i] = new Channel(rand.nextDouble(), rand.nextDouble());
-                        currentStates[iterator] = true;
-                        iterator++;
-                }
-
-                //If there are only two channels, override random and rig the channels
-                //Temporary Solution until command line arguments are implemented
-                if(numChannels == 2)
-                {
-                        riggedSolution();
-                }
-
-                int port = 0;
-
-                for(int i = 0; i < numChannels; i++)
-                {
-                        //Print their information
-                        System.out.println("Port number " + port + ": "
-                                        +                       "\nChance of staying in success: " + allChannels[i].getStaySuccess() +
-                                                                "\nChance of staying in failure: " + allChannels[i].getStayFailure());
-                        port++;
-                }
-
-                boolean isDone = false;
-                channelsRemaining = numChannels;
-
-                while(!isDone)
-                {
-                        totalRuns++;    //Increase run number each time we loop through entire remaining group of channels
-                        for(int i = 0; i < allChannels.length; i++)
-                        {
-                                //If successful, add to growing tally of remaining channels we wish to analyze, else, keep it the same.
-                                if(currentStates[i])
-                                {
-                                        currentStates[i] = allChannels[i].ping();
-                                        if(!currentStates[i])
-                                                {
-                                                        channelsRemaining--;
-                                                        System.out.println("Channel: " + i + " Removed on run " + totalRuns);
-                                                }
-                                }
-                        }
-
-                        if(channelsRemaining == 0 | totalRuns >= trials)
-                        {
-                                isDone = true;
-                        }
-
-                }
-
-                int bestRateIndex = 0;
-                int mostSuccessIndex = 0;
-                double bestRate = 0;
-                int mostSuccess = 0;
-
-                for(int i = 0; i < allChannels.length; i++)
-                {
-
-                        //Get the greatest Stay Success Rate from all channels
-                        double currRate = allChannels[i].getStaySuccess();
-                        if( currRate > bestRate)
-                        {
-                                bestRate = currRate;
-                                bestRateIndex = i;
-                        }
-
-                        //Get the channel with the most successes
-                        int numSuccess = allChannels[i].getSuccesses();
-                        if(numSuccess > mostSuccess)
-                        {
-                                mostSuccess = numSuccess;
-                                mostSuccessIndex = i;
-                        }
-                }
-
-                System.out.println();
-                System.out.println("Total Runs:" + totalRuns);
-                System.out.println("Channel with bast STA_SUCCESS rate: Channel " + bestRateIndex + "\nRate: " + bestRate);
-                System.out.println("Channel with most successes (we pick): Channel " + mostSuccessIndex + "\nSuccesses: " + mostSuccess + " out of " + totalRuns);
-        }
-
-        public static void riggedSolution()
-        {
-
-                //Channel 0 is rigged to win, Channel 1 is rigged to lose
-                allChannels[0].setStaySuccess(0.95);
-                allChannels[0].setStayFailure(0.05);
-
-                allChannels[1].setStaySuccess(0.05);
-                allChannels[1].setStayFailure(0.95);
-
-                currentStates[0] = true;
-                currentStates[1] = true;
-        }
 }
-
