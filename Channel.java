@@ -63,6 +63,7 @@ public class Channel {
 		{
 			if(chance > stayFailure)
 			{
+				successes++;
 				currentState = true;
 			}
 		}
