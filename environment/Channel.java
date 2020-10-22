@@ -1,3 +1,5 @@
+package environment;
+
 import java.util.Random;
 
 public class Channel {
