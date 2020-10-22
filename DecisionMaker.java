@@ -111,7 +111,7 @@ public class DecisionMaker {
 		StringBuilder sb = new StringBuilder("");
 		for (int i = 0; i < allChannels.length; i++)
 		{
-			sb.append("Channel " + i + ":\tStay Success:  " + allChannels[i].getStaySuccess() + 
+			sb.append("Channel " + i + ":\tStay Success:  " + allChannels[i].getStaySuccess()+ 
 					"\tStay Failure:  " + allChannels[i].getStayFailure() + "\n");
 		}
 		return sb.toString();

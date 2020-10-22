@@ -13,21 +13,21 @@ public class Driver {
 	public static void main(String[] args) throws IOException
 	{
 		System.out.println("Enter the algorithm you wish to employ: ");
-		String input = reader.readLine();
+		String input = args[0];
 		String algorithm = input;
 		System.out.println(algorithm);
 		
 		System.out.println("Enter the number of trials to use said algorithm: ");
-		int numTrials = Integer.parseInt(reader.readLine());
+		int numTrials = Integer.parseInt(args[1]);
 		System.out.println(numTrials);
 		
 		System.out.println("Would you like a verbose output?(T/F):");
-		String decision = reader.readLine().trim();
+		String decision = args[2];
 		boolean isVerbose = (decision.equals("T"))?true:false;
 		op = new OutputManager(algorithm, isVerbose, numTrials);
 		System.out.println(isVerbose);
 		System.out.println("Enter setup type (Random/CSV/Rigged): ");
-		String choice = reader.readLine().trim();
+		String choice = args[3];
 		System.out.println(choice);
 		
 		if(choice.equals("Random"))
