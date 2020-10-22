@@ -1,48 +1,60 @@
-
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Driver {
 
-	private static Scanner sc = new Scanner(System.in);
-
-
 	//Declare static variables to be used in markov chain algorithms
-	private static ChannelTester tester; 
-	private static DecisionMaker dm;
-	private static Channel[] simulatedNetwork;
-	public static void main(String[] args)
+	private static OutputManager op;
+	private static BufferedReader reader = new BufferedReader (new InputStreamReader (System.in));
+
+	public static void main(String[] args) throws IOException
 	{
-		/* 
-		 * Generates Network Based off User Input
-		 */
-		tester = new ChannelTester();
-		System.out.print("Generate Channels Based On a Random Seed? (true/false): ");
-		boolean randomGeneration = sc.nextBoolean();
-		simulatedNetwork = tester.makeChannels(randomGeneration);
-
-		dm = new DecisionMaker(simulatedNetwork);
+		System.out.println("Enter the algorithm you wish to employ: ");
+		String input = reader.readLine();
+		String algorithm = input;
+		System.out.println(algorithm);
 		
+		System.out.println("Enter the number of trials to use said algorithm: ");
+		int numTrials = Integer.parseInt(reader.readLine());
+		System.out.println(numTrials);
 		
-		// Present only for debug, prints out network after it is generated.
+		System.out.println("Would you like a verbose output?(T/F):");
+		String decision = reader.readLine().trim();
+		boolean isVerbose = (decision.equals("T"))?true:false;
+		op = new OutputManager(algorithm, isVerbose, numTrials);
+		System.out.println(isVerbose);
+		System.out.println("Enter setup type (Random/CSV/Rigged): ");
+		String choice = reader.readLine().trim();
+		System.out.println(choice);
 		
+		if(choice.equals("Random"))
+		{
+			System.out.println("Specify the randomseed");
+			long randomseed = Long.parseLong(reader.readLine());
+			System.out.println(randomseed);
+			System.out.println("Specify the number of channels:");
+			int numChannels = Integer.parseInt(reader.readLine());
+			System.out.println(numChannels);
+			op.setupRandom(randomseed, numChannels);
+		}
+		else if(choice.equals("CSV"))
+		{
+			System.out.println("Specify the comma separated probabilities: ");
+			String csp = reader.readLine();
+			System.out.println(csp);
+			op.setupCSV(csp);
+		}
+		else
+		{
+			System.out.println("Rigging the channels.");
+			op.setupRigged();
+		}
 		
-		// Sets number of channels to ping over the trial.
-		System.out.print("Enter number of trials: ");
-		int numTrials = sc.nextInt();
-		int bestChannel = dm.bruteForce(100, numTrials);
-
-		System.out.println("Best Channel: " + bestChannel);
-
-		
-		
-		/* Naive / Brute Force Algorithm
-		 * Communicates over each channel pingsPerChannel times, performs rest of pings on the channel with the highest 
-		 * success rate.
-		 */
-		
-		// Brute Force Algorithm Record Keeping
-		
+		String results = op.startSimulation();
+		System.out.println(results);
 		
 	}
-
 }
