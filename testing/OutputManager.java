@@ -14,7 +14,7 @@ public class OutputManager {
 	public String startSimulation()
 	{
 		int numSuccess = 0;
-    StringBuilder sb = new StringBuilder("");
+    		StringBuilder sb = new StringBuilder("");
 		sb.append("Algorithm used: " + algorithm.getAlgorithm() + "\n");
 		if(isVerbose)
 		{
@@ -22,13 +22,14 @@ public class OutputManager {
 			sb.append(algorithm.listProbabilities() + "\n");
 			sb.append("--------------------------------------------------------------------------------\n\n");
 		}
-		for(int i = 0; i < numTrials; i++)
-    {
-      if(algorithm.pingChannel()){
-          numSuccess++;
-      }
-    }
-    Object[] results = algorithm.getResults();
+    		for(int i = 0; i < numTrials; i++)
+    		{
+      			if(algorithm.pingChannel())
+			{
+          		numSuccess++;
+     			}
+    		}
+  		Object[] results = algorithm.getResults();
 		if(isVerbose)
 		{
 			sb.append("-----------------------------Result Statistics----------------------------------\n\n");
