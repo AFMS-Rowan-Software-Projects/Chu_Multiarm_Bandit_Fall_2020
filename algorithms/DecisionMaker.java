@@ -16,5 +16,10 @@ public abstract class DecisionMaker {
 	 * @return
 	 */
 	public abstract boolean pingChannel();
-
+	
+	/**
+	 * Returns the fields of the DecisionMaker object.
+	 * @return
+	 */
+	public abstract Object[] getResults();
 }
