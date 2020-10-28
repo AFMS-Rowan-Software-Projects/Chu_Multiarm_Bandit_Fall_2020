@@ -68,4 +68,9 @@ public class BruteForce extends DecisionMaker{
 		
 		return result;
 	}
+	
+	public Object[] getResults(){
+		Object[] results = {bestChannel, bestRate};
+		return results;
+	}
 }
