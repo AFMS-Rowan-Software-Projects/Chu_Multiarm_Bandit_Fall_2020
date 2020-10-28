@@ -1,4 +1,4 @@
-
+package testing;
 
 import environment.*;
 import algorithms.*;
@@ -69,6 +69,11 @@ public class Driver {
 		if (input.equals("bruteforce")) {
 			op = new OutputManager(network, new BruteForce(network), isVerbose, numTrials);
 		}
+		
+		if (input.equals("upperconfidencebound")) {
+			op = new OutputManager(network, new UpperConfidenceBound(network), isVerbose, numTrials);
+		}
+		
 		String results = op.startSimulation();
 		System.out.println(results);
 
