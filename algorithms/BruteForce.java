@@ -24,7 +24,7 @@ public class BruteForce extends DecisionMaker{
 
 	public boolean pingChannel()
 	{
-		boolean result = false;;
+		boolean result = false;
 		
 		// Exploration phase
 		if (currChannel < network.size())
@@ -53,9 +53,6 @@ public class BruteForce extends DecisionMaker{
 				currNumSuccess = 0;
 			}
 			
-			currChannel++;
-			currNumPings = 0;
-			currNumSuccess = 0;
 		}
 		// Exploitation Phase
 		else
@@ -65,7 +62,6 @@ public class BruteForce extends DecisionMaker{
 				result = true;
 			}
 		}
-		
 		return result;
 	}
 	
