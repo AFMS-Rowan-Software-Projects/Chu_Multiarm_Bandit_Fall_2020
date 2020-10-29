@@ -51,7 +51,7 @@ public class Driver {
 			System.out.println("Specify the comma separated probabilities: ");
 			String csp = reader.readLine().strip();
 			System.out.println(csp);
-			String[] probs = input.split(","); 
+			String[] probs = csp.split(","); 
 
 			double cprob[] = new double[probs.length];
 			for (int i = 0; i < probs.length; i++)
