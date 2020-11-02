@@ -1,0 +1,30 @@
+November 2, 2020
+
+Jeremy Dalglish
+
+Upper Confidence Bound Algorithm has now been implemented, the algorithm initially will explore 
+each channel in order to gain initial information, then it will decide which channel to explore 
+based on how they are uncertain about a channels outcome, if there is still uncertainty about
+the channel, it will be chosen again until it below a threshold. UCB is an optimistic algorithm,
+if we are uncertain about a channel, we should assume that it could be the correct channel.
+
+Random 5 Channel environment, ran for 100 Trials
+
+Channel 0:	Stay Success:  0.7308781907032909	Stay Failure:  0.41008081149220166
+Channel 1:	Stay Success:  0.20771484130971707	Stay Failure:  0.3327170559595112
+Channel 2:	Stay Success:  0.9677559094241207	Stay Failure:  0.006117182265761301
+Channel 3:	Stay Success:  0.9637047970232077	Stay Failure:  0.9398653887819098
+Channel 4:	Stay Success:  0.9471949176631939	Stay Failure:  0.9370821488959696
+
+Results:
+Best Channel was found to be Channel 2,
+with a final success rate of 96.29%
+
+The Upper Confidence Bound algorithm was successful in differentiating the between the 5 
+random channels. Based on the set of channels above we can see that channels 2-4 have relatively 
+similar chances of staying within a success state, however what differentiates channel 2 from the rest
+is its ability to return to that success state with a very high probability following a failure,
+whereas channels 3 and 4 were much more likely to remain stuck within the failure state. This shows
+that the algorithm is not only capable of identifying the channel that stays successful most of the 
+time, but also the channel that when a failure does occur, is able to return to a successful state 
+quickly.
