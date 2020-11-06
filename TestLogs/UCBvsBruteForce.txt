@@ -1,0 +1,49 @@
+November 5, 2020
+
+Jeremy Dalglish
+
+Testing the Upper Confidence Bound Algorithm against the Brute Force algorithm, within a 
+controlled environment in whichthe channels all have the same stay failure rate, but only 
+slightly different rates of stay success rate. This set of channelswas ran across both 
+algorithms 1000 times in order to gauge how often each algorithm selected the best channels, 
+or close to the best channel
+
+Rigged 10 Channel environment, ran for 100 Trials
+
+Channel 0:	Stay Success:  0.46	Stay Failure:  0.5
+Channel 1:	Stay Success:  0.47	Stay Failure:  0.5
+Channel 2:	Stay Success:  0.48	Stay Failure:  0.5
+Channel 3:	Stay Success:  0.49	Stay Failure:  0.5
+Channel 4:	Stay Success:  0.50	Stay Failure:  0.5
+Channel 5:	Stay Success:  0.51	Stay Failure:  0.5
+Channel 6:	Stay Success:  0.52	Stay Failure:  0.5
+Channel 7:	Stay Success:  0.53	Stay Failure:  0.5
+Channel 8:	Stay Success:  0.54	Stay Failure:  0.5
+Channel 9:	Stay Success:  0.55	Stay Failure:  0.5
+
+Results:
+Numbers next to Channel #: are out times chosen out of 1000 runs
+
+		Upper Confidence Bound				Brute Force
+Channel 9: 		423					170
+Channel 8: 		269					150
+Channel 7: 		154					127
+Channel 6: 		72					114
+Channel 5: 		45					101
+Channel 4: 		21					96
+Channel 3: 		10					78
+Channel 2: 		4					67
+Channel 1: 		2					50
+Channel 0:		0					47
+
+When comparing the results of the two algorithms we can see that the Upper Confidence Bound did a
+much better job at identifying the more successful channels than what the Brute Force Algorithm
+identified. 
+
+For the Upper Confidence Bound Algorithm out of 1000 runs it identified the best channel as one of
+the top 5 channels 96.3% of the time, in comparison the Brute Force identified the best channel as one 
+of the top 5 only 66.2% of the time.
+
+While the Upper Confidence Bound algorithm was not perfect in identifying the single best individual
+channel, this test does demonstrate that it would be more successful in identifying a proper subset of channels
+for use, at a much more successful rate than the Brute Force Algorithm would.
