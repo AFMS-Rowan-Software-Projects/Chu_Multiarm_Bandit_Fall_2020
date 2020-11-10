@@ -1,0 +1,125 @@
+#!/bin/bash
+
+#TO DO:
+#Implement test for CSV Files
+#Test Environment with Larger Number of Channels
+#Test procedurally generated test files
+
+#Reset log files
+if [ -f LogFiles/log.txt ]; then
+    rm LogFiles/log.txt
+fi
+if [ -f LogFiles/log2.txt ]; then
+    rm LogFiles/log2.txt
+fi
+if [ -f LogFiles/UCBResults.txt ]; then
+    rm LogFiles/UCBResults.txt
+fi
+if [ -f LogFiles/BruteResults.txt ]; then
+    rm LogFiles/BruteResults.txt
+fi
+if [ -f LogFiles/AlgComp.txt ]; then
+    rm LogFiles/AlgComp.txt
+fi
+
+#Text Colors
+GREEN='\033[0;32m'
+NC='\033[0m'
+
+read -p "Press Enter to Test run program with no flags set"
+
+printf "Command: ${GREEN}java Driver ${NC}\n\n"
+
+java Driver
+
+echo
+
+read -p "Press enter to run the program with the help flag set"
+
+printf "Command: ${GREEN}java Driver -h ${NC}\n\n"
+
+java Driver -h
+
+read -p "Press Enter to run the Brute Force Algorithm on the rigged 2 Channel environment"
+
+printf "Command: ${GREEN}java Driver -a 0 -t 200 -s 2 ${NC}\n\n"
+
+java Driver -a 0 -t 200 -s 2
+
+echo
+
+read -p "Press Enter to run the Brute Force Algorithm on rigged 2 Channel environment, now wi\
+th Verbose output"
+
+printf "Command: ${GREEN}java Driver -a 0 -t 200 -s 2 -v ${NC}\n\n"
+
+java Driver -a 0 -t 200 -s 2 -v
+
+echo
+
+read -p "Press Enter to run the Upper Confidence Bound algorithm on the rigged 2 Channel envi\
+ronment, with Verbose output"
+
+printf "Command: ${GREEN} java Driver -a 1 -t 200 -s 2 -v ${NC}\n\n"
+
+java Driver -a 1 -t 200 -s 2 -v
+
+echo
+
+read -p "Press Enter to compare Upper Confidence Bound on Rigged 2 Channel with 10 trials vs \
+100 trials"
+
+printf "Command 1: ${GREEN} java Driver -a 1 -t 10 -s 2 -v ${NC}\n\n"
+java Driver -a 1 -t 10 -s 2 -v
+
+printf "Command 2: ${GREEN} java Driver -a 1 -t 100 -s 2 -v ${NC}\n\n"
+java Driver -a 1 -t 100 -s -2 -v
+
+echo
+
+read -p "Press Enter to compare a 5 Channel System with different randomseeds"
+printf "Command 1: ${GREEN} java Driver -a 1 -t 500 -s 0 -v -rs 10 -nc 5 ${NC}\n\n"
+java Driver -a 1 -t 500 -s 0 -v -rs 10 -nc 5
+
+printf "Command 2: ${GREEN} java Driver -a 1 -t 500 -s 0 -v -rs 20 -nc 5 ${NC}\n\n"
+java Driver -a 1 -t 500 -s 0 -v -rs 20 -nc 5
+
+
+echo
+
+echo "Input number of program runs to compare Brute Force and Upper Confidence Bound"
+echo "For larger inputs (Greater than 100), program may take some time to complete"
+
+read runs
+
+channels=10
+
+for ((counter = $runs; counter > 0; counter-- ))
+do
+    java Driver -a 1 -t 10000 -s 1 -f testfile.txt >> LogFiles/log.txt
+done
+
+for ((gcounter = $channels - 1; gcounter >= 0; gcounter-- ))
+do
+    echo "Channel $gcounter: " >> LogFiles/UCBResults.txt
+    cat LogFiles/log.txt | grep -c "Channel $gcounter" >> LogFiles/UCBResults.txt
+done
+
+for ((newcounter = $runs; newcounter > 0; newcounter-- ))
+do
+    java Driver -a 0 -t 10000 -s 1 -f testfile.txt >> LogFiles/log2.txt
+done
+
+for ((gcounter2 = $channels - 1; gcounter2 >= 0; gcounter2-- ))
+do
+    echo "Channel $gcounter2: " >> LogFiles/BruteResults.txt
+    cat LogFiles/log2.txt | grep -c "Channel $gcounter2" >> LogFiles/BruteResults.txt
+done
+
+echo "UCB on left, Brute Force on Right"
+
+diff -y LogFiles/UCBResults.txt LogFiles/BruteResults.txt >> LogFiles/AlgComp.txt
+
+cat LogFiles/AlgComp.txt
+
+
