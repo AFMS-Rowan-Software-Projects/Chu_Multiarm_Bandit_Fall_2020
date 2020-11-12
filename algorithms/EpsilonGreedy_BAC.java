@@ -11,7 +11,7 @@ import java.lang.Math;
  * Operates in linear time but requires high up-front
  * cost to produce actionable results.
  */
-public class EpsilonGreedy extends DecisionMaker{
+public class EpsilonGreedy_BAC extends DecisionMaker{
 
     public class Pair implements Comparable<Pair>{
         int channel;
@@ -62,7 +62,7 @@ public class EpsilonGreedy extends DecisionMaker{
 
     private PriorityQueue<Pair> subsetManager;
 
-    public EpsilonGreedy(NetworkManager network){
+    public EpsilonGreedy_BAC(NetworkManager network){
         super(network);
 
         this.network = network;
