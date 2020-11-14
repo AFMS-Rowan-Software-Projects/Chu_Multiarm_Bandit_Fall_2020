@@ -28,10 +28,10 @@ if  grep -q 'nc' tempFile; then
 #Rigged 2 Channel environment
 elif grep -q 's 2' tempFile; then
     channels=2
-#CSV Files
+#CSV Files, -f must be last flag set
 else
     chosenFile=$(awk '{print $NF}' tempFile)
-
+    
     cat $chosenFile | grep -o ',' | wc -l > channelCount.txt
 
     read channels < channelCount.txt
@@ -39,8 +39,6 @@ else
     rm channelCount.txt
 
     channels=$((($channels + 1)/2))
-
-    echo $channels
 fi
 
 for ((gcounter = $channels - 1; gcounter >= 0; gcounter-- ))
@@ -48,6 +46,14 @@ do
         printf "Channel $gcounter: " >> LogFiles/batchResults.txt
         cat LogFiles/batchLog.txt | grep -c "Was Channel $gcounter\>" >> LogFiles/batchResults.txt
 done
+
+#If Verbose Output is requested, print out Channel Probabilities before Results
+if grep -q '\-v' tempFile; then
+    var=$(($channels + 5))
+    tail -n +8 LogFiles/batchLog.txt | head -n $var
+fi
+
+echo
 
 #Print Sorted Results
 sort -r -k 3,3 LogFiles/batchResults.txt

@@ -29,7 +29,7 @@ NC='\033[0m'
 echo "First you must choose which file you would like to run the algorithms on"
 echo "Here are the files available"
 
-ls CSVFiles
+ls testingcsvs
 
 read chosenFile
 
@@ -39,7 +39,7 @@ echo "For larger inputs (Greater than 100), program may take some time to comple
 read runs
 
 #Find number of channels within file
-cat CSVFiles/$chosenFile | grep -o ',' | wc -l > channelCount.txt
+cat testingcsvs/$chosenFile | grep -o ',' | wc -l > channelCount.txt
 
 read channels < channelCount.txt
 
@@ -53,29 +53,29 @@ bruteTrials=$(($channels * 100))
 
 for ((counter = $runs; counter > 0; counter-- ))
 do
-    java Driver -a 1 -t 10000 -s 1 -f CSVFiles/$chosenFile >> LogFiles/log.txt
+    java Driver -a 1 -t 10000 -s 1 -f testingcsvs/$chosenFile >> LogFiles/log.txt
 done
 
 for ((gcounter = $channels - 1; gcounter >= 0; gcounter-- ))
 do
     selections=$(cat LogFiles/log.txt | grep -c "Channel $gcounter\>")
     if [[ $selections -gt 0 ]] ; then
-        printf "Channel $gcounter: " >> LogFiles/UCBResults.txt
-        cat LogFiles/log.txt | grep -c "Channel $gcounter\>" >> LogFiles/UCBResults.txt
+	printf "Channel $gcounter: " >> LogFiles/UCBResults.txt
+	cat LogFiles/log.txt | grep -c "Channel $gcounter\>" >> LogFiles/UCBResults.txt
     fi
 done
 
 for ((newcounter = $runs; newcounter > 0; newcounter-- ))
 do
-    java Driver -a 0 -t $bruteTrials -s 1 -f CSVFiles/$chosenFile >> LogFiles/log2.txt
+    java Driver -a 0 -t $bruteTrials -s 1 -f testingcsvs/$chosenFile >> LogFiles/log2.txt
 done
 
 for ((gcounter2 = $channels - 1; gcounter2 >= 0; gcounter2-- ))
 do
     selections=$(cat LogFiles/log2.txt | grep -c "Channel $gcounter2\>")
     if [[ $selections -gt 0 ]] ; then
-        printf "Channel $gcounter2: " >> LogFiles/BruteResults.txt
-        cat LogFiles/log2.txt | grep -c "Channel $gcounter2\>" >> LogFiles/BruteResults.txt
+	printf "Channel $gcounter2: " >> LogFiles/BruteResults.txt
+	cat LogFiles/log2.txt | grep -c "Channel $gcounter2\>" >> LogFiles/BruteResults.txt
     fi
 done
 
@@ -85,5 +85,3 @@ echo "Channels who did not win a single run were removed"
 diff -y LogFiles/UCBResults.txt LogFiles/BruteResults.txt >> LogFiles/AlgComp.txt
 
 cat LogFiles/AlgComp.txt
-
-
