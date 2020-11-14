@@ -1,4 +1,5 @@
 #!/bin/bash
+#IF USING CSV FILES, USE THE FILE FLAG LAST IN THE COMMAND
 
 if [ -f LogFiles/batchResults.txt ]; then
     rm LogFiles/batchResults.txt
