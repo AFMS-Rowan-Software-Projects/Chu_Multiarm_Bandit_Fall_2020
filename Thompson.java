@@ -1,21 +1,20 @@
+package algorithms;
+
+import environment.*;
+
 
 public class Thompson extends DecisionMaker {
 
-    private int currChannel;
     private int currNumPings;
     private int bestChannel;
     private double bestRate;
 
     double[] cumuReward = new double[network.size()];
     double[] pingCounts = new double[network.size()];
-    double[] avgReward = new double[network.size()];
-    double[] decValues = new double[network.size()];
     double[] successRate = new double[network.size()];
 
     public Thompson(NetworkManager network) {
         super(network);
-
-        currChannel = 0;
         currNumPings = 0;
         bestChannel = 0;
         bestRate = 0.0;
@@ -56,6 +55,7 @@ public class Thompson extends DecisionMaker {
         }
         return result;
     }
+    
     static int maximumArgument(double[] vector)
     {
         double maxVal = vector[0];
@@ -68,6 +68,7 @@ public class Thompson extends DecisionMaker {
         }
         return result;
     }
+    
     @Override
     public Object[] getResults() {
 
