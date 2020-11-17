@@ -93,41 +93,12 @@ public class EpsilonGreedy extends DecisionMaker{
             pingTracker[i] = INITIALIZATION_FACTOR;
             subsetManager.add(new Pair(i, assumedProbabilities[i]));
         }
-    }
-
-    public boolean pingChannel(){
-        double greed = Math.random();
-        if (greed < 1-EPSILON){
-            int size = network.size();
-            int randomChannel = (int)Math.random() * size + 1;
-            boolean channelUpdater = network.pingChannel(randomChannel);
-            assumedProbabilities[randomChannel] = ((assumedProbabilities[randomChannel]*pingTracker[randomChannel]) 
-                                                    + (channelUpdater?1:0))/pingTracker[++randomChannel];
-            subsetManager.add(new Pair(randomChannel, assumedProbabilities[randomChannel]));
-        }
-        return greed < 1-EPSILON;
-    }
-
-    public boolean pingChannel_ask_better_case(){
-        double greed = Math.random();
-        if (greed < 1-EPSILON){
-            int size = network.size();
-            for(int i = 0; i<size; i++){
-                int randomChannel = (int)Math.random() * size + 1;
-                boolean channelUpdater = network.pingChannel(randomChannel);
-                assumedProbabilities[randomChannel] = ((assumedProbabilities[randomChannel]*pingTracker[randomChannel]) 
-                                                        + (channelUpdater?1:0))/pingTracker[++randomChannel];
-                subsetManager.add(new Pair(randomChannel, assumedProbabilities[randomChannel]));
-            }
-        }
-        return greed < 1-EPSILON;
-    }
 
 
     /**
      * Exploitation/Exploration loop.
      */
-    public boolean pingChannel_original(){
+    public boolean pingChannel(){
 
         for (int i = 0; i <= NUMCHANCES; i++){
             int randomChannel = (int) Math.random() * (network.size() + 1);  
