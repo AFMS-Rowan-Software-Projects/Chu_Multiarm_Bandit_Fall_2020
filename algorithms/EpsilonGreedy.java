@@ -97,6 +97,7 @@ public class EpsilonGreedy extends DecisionMaker{
             pingTracker[i] = INITIALIZATION_FACTOR;
             subsetManager.add(new Pair(i, assumedProbabilities[i]));
         }
+    }
 
 
     /**
