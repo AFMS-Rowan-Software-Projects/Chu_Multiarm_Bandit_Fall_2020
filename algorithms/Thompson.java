@@ -26,6 +26,8 @@ public class Thompson extends DecisionMaker {
     @Override
     public boolean pingChannel() {
         boolean result = false;
+        double sample = 0;
+        double maxSample = -1;
         if(currNumPings < network.size()){
             currChannel = currNumPings;
 
@@ -37,11 +39,9 @@ public class Thompson extends DecisionMaker {
             }
 
             pingCounts[currChannel]++;
+            currNumPings++;
         }
         else {
-            double sample = 0;
-            bestChannel = 0;
-            double maxSample = -1;
             for(int i = 0; i < net.length; i++) {
                 sample = betaVariate(cumuReward[i],failures[i]);
                 if(sample > maxSample) {
@@ -83,8 +83,8 @@ public class Thompson extends DecisionMaker {
                 successRate[i] = (double) cumuReward[i] / pingCounts[i];
             }
         }
-
-        bestRate = successRate[maximumArgument(successRate)];
+        bestChannel = maximumArgument(successRate);
+        bestRate = successRate[bestChannel];
 
         Object[] results = {bestChannel, bestRate};
         return results;
