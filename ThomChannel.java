@@ -9,7 +9,11 @@ public class ThomChannel extends Channel {
     {
         super(staySuccess, stayFailure);
     }
-
+    
+    public int getFailures(){
+        return failures;
+    }
+    
     public boolean ping()
     {
         double chance = random.nextDouble();
