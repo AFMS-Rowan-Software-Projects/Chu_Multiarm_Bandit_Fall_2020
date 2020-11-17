@@ -13,6 +13,7 @@ public class Thompson extends DecisionMaker {
     double[] cumuReward = new double[network.size()];
     double[] pingCounts = new double[network.size()];
     double[] successRate = new double[network.size()];
+    double[] failures = new double[network.size()];
 
     public Thompson(NetworkManager network) {
         super(network);
@@ -25,14 +26,15 @@ public class Thompson extends DecisionMaker {
     @Override
     public boolean pingChannel() {
         boolean result = false;
-        if(currNumPings < network.size())
-        {
+        if(currNumPings < network.size()){
             currChannel = currNumPings;
 
-            if (network.pingChannel(currChannel))
+            if (network.pingChannel(currChannel)){
                 cumuReward[currChannel] += 1.0;
-            else
-                cumuReward[currChannel] +=  0.0;
+            }
+            else{
+                failures[currChannel] +=  1.0;
+            }
 
             pingCounts[currChannel]++;
         }
@@ -40,9 +42,8 @@ public class Thompson extends DecisionMaker {
             double sample = 0;
             bestChannel = 0;
             double maxSample = -1;
-            Channel[] net = ((SimulatedNetwork)network).getNetwork();
             for(int i = 0; i < net.length; i++) {
-                sample = ((ThomChannel)net[i]).sample();
+                sample = betaVariate(cumuReward[i],failures[i]);
                 if(sample > maxSample) {
                     maxSample = sample;
                     bestChannel = i;
@@ -53,6 +54,9 @@ public class Thompson extends DecisionMaker {
             pingCounts[bestChannel]+=1.0;
             if(result) {
                 cumuReward[bestChannel]+=1.0;
+            }
+            else{
+                failures[i]+=1.0;
             }
         }
         return result;
@@ -84,5 +88,64 @@ public class Thompson extends DecisionMaker {
 
         Object[] results = {bestChannel, bestRate};
         return results;
+    }
+       
+   private double gammaVariate(double successes, double failures) {
+        final double SG_MAGICCONST = 1.0 + Math.log(4.5);
+        double x;
+        if (successes > 1.0) {
+            double ainv = Math.sqrt(2.0 * successes - 1.0);
+            double bbb = successes - Math.log(4.0);
+            double ccc = successes + ainv;
+
+            while(true) {
+                double u1 = Math.random();
+                if (!((0.0000001 < u1) && (u1 < 0.9999999))) {
+                    continue;
+                }
+                double u2 = 1.0 - Math.random();
+                double v = Math.log(u1 / (1.0 - u1)) / ainv;
+                x = successes * Math.exp(v);
+                double z = u1 * u1 * u2;
+                double r = bbb + ccc * v - x;
+                if ((r + SG_MAGICCONST - 4.5 * z >= 0.0) || (r >= Math.log(z))) {
+                    return x * failures;
+                }
+            }
+        }
+
+        else if (successes == 1.0) {
+            return Math.log(1.0 - Math.random()) * failures;
+        }
+        else {
+            // successes is between 0 and 1 (exclusive)
+            // Uses ALGORITHM GS of Statistical Computing - Kennedy & Gentle
+            while(true) {
+                double u = Math.random();
+                double b = (Math.E + successes) / Math.E;
+                double p = b * u;
+                if (p <= 1.0) {
+                    x = Math.pow(p,1.0 / successes);
+                }
+                else {
+                    x = -1*Math.log((b - p) / successes);
+                }
+                double u1 = Math.random();
+                if (p > 1.0) {
+                    if (u1 <= Math.pow(x,(successes - 1.0))) {
+                        break;
+                    }
+                }
+                else if(u1 <= Math.exp(-x)) {
+                    break;
+                }
+            }
+            return x * failures;
+        }
+    }
+
+    private double betaVariate(double successes, double failures) {
+        double y = gammaVariate(successes, 1.0);
+        return y / (y + gammaVariate(failures, 1.0));
     }
 }
