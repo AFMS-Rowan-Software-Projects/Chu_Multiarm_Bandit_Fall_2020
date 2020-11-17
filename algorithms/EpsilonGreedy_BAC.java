@@ -30,6 +30,10 @@ public class EpsilonGreedy_BAC extends DecisionMaker{
             else   
                 return 0;
         }
+        
+        public boolean equals(Pair e){
+            return e.channel == this.channel;
+        }
     }
 
     /**
@@ -101,6 +105,7 @@ public class EpsilonGreedy_BAC extends DecisionMaker{
             int size = network.size();
             for(int i = 0; i<size; i++){
                 int randomChannel = (int)Math.random() * size + 1;
+                subsetManager.remove(new Pair(randomChannel, assumedProbabilties[randomChannel]));
                 boolean channelUpdater = network.pingChannel(randomChannel);
                 assumedProbabilities[randomChannel] = ((assumedProbabilities[randomChannel]*pingTracker[randomChannel]) 
                                                         + (channelUpdater?1:0))/pingTracker[++randomChannel];
