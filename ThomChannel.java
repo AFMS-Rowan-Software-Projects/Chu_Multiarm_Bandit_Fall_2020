@@ -1,5 +1,6 @@
-
+package environment;
 import java.util.Random;
+
 public class ThomChannel extends Channel {
 
     private int failures = 0;
