@@ -1,4 +1,4 @@
-package testing;
+package algorithms;
 
 import java.util.PriorityQueue;
 import java.util.Comparator;
