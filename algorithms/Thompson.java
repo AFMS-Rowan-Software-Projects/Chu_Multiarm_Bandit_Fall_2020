@@ -4,7 +4,8 @@ import environment.*;
 
 
 public class Thompson extends DecisionMaker {
-
+       
+    private int currChannel;
     private int currNumPings;
     private int bestChannel;
     private double bestRate;
@@ -15,6 +16,7 @@ public class Thompson extends DecisionMaker {
 
     public Thompson(NetworkManager network) {
         super(network);
+        currChannel = 0;
         currNumPings = 0;
         bestChannel = 0;
         bestRate = 0.0;
