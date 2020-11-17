@@ -15,6 +15,7 @@ public class ThomChannel extends Channel {
         return failures;
     }
     
+    @Override
     public boolean ping()
     {
         double chance = random.nextDouble();
