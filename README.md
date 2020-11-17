@@ -1,3 +1,1 @@
-# Chu_Multiarm_Bandit_Fall_2020
-# Alen Dimitrov
-# Mathew Fiduk
+Has working Thompson Sampling with the usage of ThomChannel, a subclass of Channel, that include gamma/beta variation and number of failures. The problem is that there is no built in gamma or beta variation to java, and translating between python and java, theres a chance that certain values are exposed to round-off error. This is seen by a very very large number of trials being needed before the probability can converge on the best channel, and even then it is sometimes still off.
