@@ -115,7 +115,7 @@ public class Thompson extends DecisionMaker {
         }
 
         else if (alpha == 1.0) {
-            return Math.log(1.0 - Math.random()) * beta;
+            return -1*Math.log(1.0 - Math.random()) * beta;
         }
         else {
             // successes is between 0 and 1 (exclusive)
