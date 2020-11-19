@@ -3,6 +3,7 @@ package algorithms;
 import environment.*;
 
 
+
 public class Thompson extends DecisionMaker {
        
     private int currChannel;
@@ -42,21 +43,21 @@ public class Thompson extends DecisionMaker {
             currNumPings++;
         }
         else {
-            for(int i = 0; i < net.length; i++) {
+            for(int i = 0; i < network.size(); i++) {
                 sample = betaVariate(cumuReward[i],failures[i]);
                 if(sample > maxSample) {
                     maxSample = sample;
                     bestChannel = i;
                 }
             }
-            result = net[bestChannel].ping();
+            result = network.pingChannel(bestChannel);
             currNumPings++;
             pingCounts[bestChannel]+=1.0;
             if(result) {
                 cumuReward[bestChannel]+=1.0;
             }
             else{
-                failures[i]+=1.0;
+                failures[bestChannel]+=1.0;
             }
         }
         return result;
@@ -149,3 +150,4 @@ public class Thompson extends DecisionMaker {
         return y / (y + gammaVariate(failures, 1.0));
     }
 }
+
