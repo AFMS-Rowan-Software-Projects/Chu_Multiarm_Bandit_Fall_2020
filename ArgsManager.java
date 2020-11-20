@@ -183,7 +183,8 @@ public class ArgsManager {
 			{
 				for(int i = 0; i < input.length; i+=2)
 				{
-					if(input[i] == "-f")
+				   
+				    if(input[i].equals("-f"))
 					{
 						//Ignore it
 					}
