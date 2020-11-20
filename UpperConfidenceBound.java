@@ -1,3 +1,5 @@
+//UNCLASSIFIED
+
 public class UpperConfidenceBound extends DecisionMaker{
 	
 	private int currChannel;
@@ -6,10 +8,10 @@ public class UpperConfidenceBound extends DecisionMaker{
 	private double bestRate;
 		
 	double[] cumuReward = new double[network.size()];
-	double[] pingCounts = new double[network.size()];
-    double[] avgReward = new double[network.size()];
-    double[] decValues = new double[network.size()];
-    double[] successRate = new double[network.size()];
+        double[] pingCounts = new double[network.size()];
+        double[] avgReward = new double[network.size()];
+        double[] decValues = new double[network.size()];
+        double[] successRate = new double[network.size()];
     
 	public UpperConfidenceBound(NetworkManager network) {
 		super(network);
@@ -58,24 +60,25 @@ public class UpperConfidenceBound extends DecisionMaker{
 	    		cumuReward[currChannel] += 0.0;
 	    	}
 		}
-    	pingCounts[currChannel]++;   	
-    	currNumPings++;
-    	bestChannel = maximumArgument(pingCounts);    	
+		
+		pingCounts[currChannel]++;   	
+		currNumPings++;
+		bestChannel = maximumArgument(pingCounts);    	
     	
 		return result;
 	}
 	
-	static int maximumArgument(double[] vector)
- 	{
-      double maxVal = vector[0];
-      int result = 0;
-      for (int i = 0; i < vector.length; i++) {
-        if (vector[i] > maxVal) {
-          maxVal = vector[i];
-          result = i;
-        }
-      }
-      return result;
+    static int maximumArgument(double[] vector)
+    {
+	double maxVal = vector[0];
+	int result = 0;
+	for (int i = 0; i < vector.length; i++) {
+	    if (vector[i] > maxVal) {
+		maxVal = vector[i];
+		result = i;
+	    }
+	}
+	return result;
     }
 
 	@Override

@@ -1,3 +1,5 @@
+//UNCLASSIFIED
+
 public interface NetworkManager {
 
 	/**

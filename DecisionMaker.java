@@ -1,3 +1,5 @@
+//UNCLASSIFIED
+
 public abstract class DecisionMaker {
 
 	protected NetworkManager network;

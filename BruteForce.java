@@ -1,3 +1,5 @@
+//UNCLASSIFIED
+
 public class BruteForce extends DecisionMaker{
 
 	private final int pingsPerChannel = 100;

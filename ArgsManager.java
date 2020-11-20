@@ -1,3 +1,5 @@
+//UNCLASSIFIED
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
@@ -17,9 +19,7 @@ public class ArgsManager {
 		if(!(boolean)results[0]) throw new InvalidArgumentException(((StringBuilder)results[1]).toString());
 	}
 	
-	
-	
-	
+		
 	public String processArguments() throws IOException
 	{
 		if(findFlag("-h", arguments) != -1) 
@@ -33,6 +33,8 @@ public class ArgsManager {
 			sb.append("\n-----------------------------Algorithms------------------------------\n");
 			sb.append("\n0: Brute Force");
 			sb.append("\n1: Upper Confidence Bound");
+			sb.append("\n2: Epsilon Greedy");
+			sb.append("\n3: Thompson Sampling");
 			sb.append("\n---------------------------------------------------------------------\n");
 			sb.append("\n-----------------------------Setup------------------------------\n");
 			sb.append("\n0: Random");
@@ -57,7 +59,8 @@ public class ArgsManager {
 		else
 		{
 			int input = Integer.parseInt(arguments[findFlag("-a", arguments) + 1]);
-			String algorithm = (input == 0)?"brute force":"upper confidence bound";
+			String algorithm = (input == 0)?"brute force":(input == 1)?"upper confidence bound":
+			    (input == 2)?"epsilon greedy":"thompson sampling";
 			sb.append("\nAlgorithm: " + algorithm);
 
 			int numTrials = Integer.parseInt(arguments[findFlag("-t", arguments) + 1]);
@@ -129,11 +132,17 @@ public class ArgsManager {
 			else
 			{
 				if (algorithm.equals("brute force")) {
-					op = new OutputManager(network, new BruteForce(network), isVerbose, numTrials);
+				    op = new OutputManager(network, new BruteForce(network), isVerbose, numTrials);
 				}
 				
 				if (algorithm.equals("upper confidence bound")) {
-					op = new OutputManager(network, new UpperConfidenceBound(network), isVerbose, numTrials);
+				    op = new OutputManager(network, new UpperConfidenceBound(network), isVerbose, numTrials);
+				}
+				if (algorithm.equals("epsilon greedy")){
+				    op = new OutputManager(network, new EpsilonGreedy_Linear(network), isVerbose, numTrials); 
+				}
+				if (algorithm.equals("thompson sampling")){
+				    op = new OutputManager(network, new Thompson(network), isVerbose, numTrials);
 				}
 				
 				String results = op.startSimulation();
