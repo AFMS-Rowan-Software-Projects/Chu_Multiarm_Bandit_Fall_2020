@@ -1,0 +1,108 @@
+November 14, 2020
+
+Jeremy Dalglish
+
+Testing the Limits of the Upper Confidence Bound Algorithm on a 32 channel environment
+where the Stay Sucess rate is from 74-76% chance and the Stay Failure rate is in
+between 71-73% chance by running the algorithm on the same set of channels 1000 times, and 
+observing whether or not the algorithm is able to settle upon a clear best channel.
+
+I expect that the algorithm will not be able to distinguish all the channels from one another,
+there won't be a clear favorite due to how similar each channel is to one another.
+
+
+Full Command: java Driver -a 1 -t 3200 -s 1 -v -f testingcsvs/32_0.75_0.72
+
+-----------------------------Channel Probabilities------------------------------
+
+Channel 0:      Stay Success:  0.7462843545297888       Stay Failure:  0.7191143158149347
+Channel 1:      Stay Success:  0.748146283062241        Stay Failure:  0.7235725671755981
+Channel 2:      Stay Success:  0.7456070174696247       Stay Failure:  0.7236867623363331
+Channel 3:      Stay Success:  0.7464381687440069       Stay Failure:  0.7282323907101238
+Channel 4:      Stay Success:  0.7468151171097782       Stay Failure:  0.7210363158365544
+Channel 5:      Stay Success:  0.7437621753204086       Stay Failure:  0.7253001854770209
+Channel 6:      Stay Success:  0.7521521968896201       Stay Failure:  0.7241126133418806
+Channel 7:      Stay Success:  0.7459852013629161       Stay Failure:  0.7261523875392709
+Channel 8:      Stay Success:  0.7457582295716128       Stay Failure:  0.7200552434237778
+Channel 9:      Stay Success:  0.7498512370529644       Stay Failure:  0.7243783062668343
+Channel 10:     Stay Success:  0.756445189371221        Stay Failure:  0.7150340116862409
+Channel 11:     Stay Success:  0.7483941751900988       Stay Failure:  0.7237357352042973
+Channel 12:     Stay Success:  0.7522538700765572       Stay Failure:  0.7214247865352506
+Channel 13:     Stay Success:  0.7461764997923404       Stay Failure:  0.7145389520329347
+Channel 14:     Stay Success:  0.7433293697948842       Stay Failure:  0.7201509250845827
+Channel 15:     Stay Success:  0.7480639444986057       Stay Failure:  0.7193350449880432
+Channel 16:     Stay Success:  0.7423926414057500	Stay Failure:  0.7200566071699955
+Channel 17:     Stay Success:  0.7493844362078201       Stay Failure:  0.7273871449696576
+Channel 18:     Stay Success:  0.7557142605918112       Stay Failure:  0.726852100707991
+Channel 19:     Stay Success:  0.7514349476646462       Stay Failure:  0.7177689693645148
+Channel 20:     Stay Success:  0.7510055737932564       Stay Failure:  0.7258057727090816
+Channel 21:     Stay Success:  0.7421930144203479       Stay Failure:  0.7123677064204732
+Channel 22:     Stay Success:  0.748157413073204        Stay Failure:  0.7148374500870500
+Channel 23:     Stay Success:  0.7558499218706995       Stay Failure:  0.7278671182830303
+Channel 24:     Stay Success:  0.7464234230604814       Stay Failure:  0.7253596682488612
+Channel 25:     Stay Success:  0.7493883319275765       Stay Failure:  0.7143184305827301
+Channel 26:     Stay Success:  0.7455382634209100 	Stay Failure:  0.7149459301196056
+Channel 27:     Stay Success:  0.7528267908919898       Stay Failure:  0.7256018377062756
+Channel 28:     Stay Success:  0.7499466756191839       Stay Failure:  0.7173732652484326
+Channel 29:     Stay Success:  0.7424707627797658       Stay Failure:  0.7278033349924953
+Channel 30:     Stay Success:  0.7430569055971904       Stay Failure:  0.7173788647757536
+Channel 31:     Stay Success:  0.7578364958649193       Stay Failure:  0.7190877027149911
+
+--------------------------------------------------------------------------------
+
+Results, ordered by which Channel was selected the most amount of times
+
+Channel 23: 47
+Channel 10: 40
+Channel 28: 39
+Channel 22: 39
+Channel 31: 37
+Channel 20: 37
+Channel 12: 37
+Channel 25: 36
+Channel 24: 36
+Channel 14: 36
+Channel 26: 35
+Channel 11: 35
+Channel 8: 34
+Channel 18: 33
+Channel 13: 33
+Channel 19: 32
+Channel 30: 31
+Channel 21: 31
+Channel 9: 30
+Channel 4: 29
+Channel 3: 29
+Channel 27: 29
+Channel 6: 27
+Channel 1: 27
+Channel 2: 26
+Channel 16: 26
+Channel 0: 25
+Channel 7: 23
+Channel 15: 23
+Channel 17: 22
+Channel 5: 19
+Channel 29: 17
+
+The algorithm chose Channel 23 the most amount of times (SS: 0.7558499218706995 SF: 0.7278671182830303)
+The algorithm chose Channel 29 the least amount of times (SS: 0.7424707627797658 SF: 0.7278033349924953)
+
+TOP 3 Average Stay Success Rate = 0.7540805956203682
+BOT 3 Average Stay Success Rate = 0.7452057914359981
+Difference: 0.008874804184370144
+
+TOP 3 Average Stay Failure Rate = 0.720091465072568
+BOT 3 Average Stay Failure Rate = 0.7268302218130579
+Difference: -0.0067387567404898485
+
+When observing a set of channels that has a group of success and failure that is so similar to each other
+the algorithm does not do a great job at identifying a clear number one channel, this iteration was done with
+3200 trials per algorithm run, increasing that amount may provide better accuracy but woulld cost more time.
+
+The fact that the supposed worst channel being 29 was still chosen 17/1000 times is evidence that when the
+rates of failure and success are so close to one another the algorithm is not going to be able to pick a clear favorite
+every single time. However the average of the best 3 channels SS and SF rates are better than the
+average of the bottom 3 channels by a fair margin considering the close proximity of the SS and SF rates. 
+So while the algorithm may still pick the worst channel on some occasions, it does select the
+better channels more frequently than the worst ones.
