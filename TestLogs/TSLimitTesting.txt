@@ -1,0 +1,100 @@
+November 22, 2020
+
+Jeremy Dalglish
+
+Testing the Limits of the Thompson Sampling Algorithm on a 32 Channel environment, 
+Stay Success rate is in between 74-76% whilst the Stay Failure rate is in between 71-73%.
+This is the same set of data that was used for the UCB Limit Testing.
+
+My expectation is that the data set is too close together, and that the algorithm will not be able
+to identify a best channel due to the similarities of the channels, and that the algorithm has been
+Limited to 3200 trials for this run.
+
+
+-----------------------------Channel Probabilities------------------------------
+
+Channel 0:	Stay Success:  0.7462843545297888	Stay Failure:  0.7191143158149347
+Channel 1:	Stay Success:  0.748146283062241	Stay Failure:  0.7235725671755981
+Channel 2:	Stay Success:  0.7456070174696247	Stay Failure:  0.7236867623363331
+Channel 3:	Stay Success:  0.7464381687440069	Stay Failure:  0.7282323907101238
+Channel 4:	Stay Success:  0.7468151171097782	Stay Failure:  0.7210363158365544
+Channel 5:	Stay Success:  0.7437621753204086	Stay Failure:  0.7253001854770209
+Channel 6:	Stay Success:  0.7521521968896201	Stay Failure:  0.7241126133418806
+Channel 7:	Stay Success:  0.7459852013629161	Stay Failure:  0.7261523875392709
+Channel 8:	Stay Success:  0.7457582295716128	Stay Failure:  0.7200552434237778
+Channel 9:	Stay Success:  0.7498512370529644	Stay Failure:  0.7243783062668343
+Channel 10:	Stay Success:  0.756445189371221	Stay Failure:  0.7150340116862409
+Channel 11:	Stay Success:  0.7483941751900988	Stay Failure:  0.7237357352042973
+Channel 12:	Stay Success:  0.7522538700765572	Stay Failure:  0.7214247865352506
+Channel 13:	Stay Success:  0.7461764997923404	Stay Failure:  0.7145389520329347
+Channel 14:	Stay Success:  0.7433293697948842	Stay Failure:  0.7201509250845827
+Channel 15:	Stay Success:  0.7480639444986057	Stay Failure:  0.7193350449880432
+Channel 16:	Stay Success:  0.74239264140575		Stay Failure:  0.7200566071699955
+Channel 17:	Stay Success:  0.7493844362078201	Stay Failure:  0.7273871449696576
+Channel 18:	Stay Success:  0.7557142605918112	Stay Failure:  0.726852100707991
+Channel 19:	Stay Success:  0.7514349476646462	Stay Failure:  0.7177689693645148
+Channel 20:	Stay Success:  0.7510055737932564	Stay Failure:  0.7258057727090816
+Channel 21:	Stay Success:  0.7421930144203479	Stay Failure:  0.7123677064204732
+Channel 22:	Stay Success:  0.748157413073204	Stay Failure:  0.71483745008705
+Channel 23:	Stay Success:  0.7558499218706995	Stay Failure:  0.7278671182830303
+Channel 24:	Stay Success:  0.7464234230604814	Stay Failure:  0.7253596682488612
+Channel 25:	Stay Success:  0.7493883319275765	Stay Failure:  0.7143184305827301
+Channel 26:	Stay Success:  0.74553826342091		Stay Failure:  0.7149459301196056
+Channel 27:	Stay Success:  0.7528267908919898	Stay Failure:  0.7256018377062756
+Channel 28:	Stay Success:  0.7499466756191839	Stay Failure:  0.7173732652484326
+Channel 29:	Stay Success:  0.7424707627797658	Stay Failure:  0.7278033349924953
+Channel 30:	Stay Success:  0.7430569055971904	Stay Failure:  0.7173788647757536
+Channel 31:	Stay Success:  0.7578364958649193	Stay Failure:  0.7190877027149911
+
+Results:
+
+Runtime: 284 Seconds
+
+Channel 25: 46
+Channel 19: 45
+Channel 12: 43
+Channel 1: 42
+Channel 31: 41
+Channel 18: 40
+Channel 10: 40
+Channel 8: 39
+Channel 28: 34
+Channel 2: 34
+Channel 21: 34
+Channel 13: 34
+Channel 4: 33
+Channel 22: 32
+Channel 0: 32
+Channel 7: 30
+Channel 23: 30
+Channel 11: 30
+Channel 26: 29
+Channel 5: 28
+Channel 27: 28
+Channel 14: 28
+Channel 30: 27
+Channel 17: 27
+Channel 16: 26
+Channel 6: 25
+Channel 20: 25
+Channel 15: 24
+Channel 9: 22
+Channel 29: 21
+Channel 24: 20
+Channel 3: 11
+
+As expected the algorithm did struggle to identify a singular or even a few channels that it had
+favored, with the worst channel being selected 11 times, the best channel being selected 46 times,
+and all the other channels falling somewhere in between.
+
+TOP 3 AVG SS = 0.75102571655626
+BOT 3 AVG SS = 0.74511078486142
+DIFF = On average top 3 SS was 0.005914931695 better than BOT 3
+
+TOP 3 AVG SF = 0.717837395494165
+BOT 3 AVG SF = 0.727131797983827
+DIFF = On average top 3 SF was 0.009294402489662 better than BOT 3
+
+Even though the algorithm wasn’t able to find a specific channel that it deemed the best, it’s top 3 
+Channels were clearly better than the bottom 3 channels, and if the program was given more trials
+To run I think we would begin to see more clearly which channels that algorithm really favored.

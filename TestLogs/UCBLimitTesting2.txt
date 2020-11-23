@@ -1,0 +1,95 @@
+Jeremy Dalglish
+
+November 22, 2020
+
+Originally, I had run UCB Limit Testing on this set of data allowing the algorithm 3200 runs to
+Make its decision, and I found that it struggled to properly differentiate the best channels from
+the worst, so I increased the amount of trials allowed for the algorithm ten fold, allowing for
+32000 pings of the channels to see how much the decisions improved by
+
+-----------------------------Channel Probabilities------------------------------
+
+Channel 0:	Stay Success:  0.7462843545297888	Stay Failure:  0.7191143158149347
+Channel 1:	Stay Success:  0.748146283062241	Stay Failure:  0.7235725671755981
+Channel 2:	Stay Success:  0.7456070174696247	Stay Failure:  0.7236867623363331
+Channel 3:	Stay Success:  0.7464381687440069	Stay Failure:  0.7282323907101238
+Channel 4:	Stay Success:  0.7468151171097782	Stay Failure:  0.7210363158365544
+Channel 5:	Stay Success:  0.7437621753204086	Stay Failure:  0.7253001854770209
+Channel 6:	Stay Success:  0.7521521968896201	Stay Failure:  0.7241126133418806
+Channel 7:	Stay Success:  0.7459852013629161	Stay Failure:  0.7261523875392709
+Channel 8:	Stay Success:  0.7457582295716128	Stay Failure:  0.7200552434237778
+Channel 9:	Stay Success:  0.7498512370529644	Stay Failure:  0.7243783062668343
+Channel 10:	Stay Success:  0.756445189371221	Stay Failure:  0.7150340116862409
+Channel 11:	Stay Success:  0.7483941751900988	Stay Failure:  0.7237357352042973
+Channel 12:	Stay Success:  0.7522538700765572	Stay Failure:  0.7214247865352506
+Channel 13:	Stay Success:  0.7461764997923404	Stay Failure:  0.7145389520329347
+Channel 14:	Stay Success:  0.7433293697948842	Stay Failure:  0.7201509250845827
+Channel 15:	Stay Success:  0.7480639444986057	Stay Failure:  0.7193350449880432
+Channel 16:	Stay Success:  0.74239264140575		Stay Failure:  0.7200566071699955
+Channel 17:	Stay Success:  0.7493844362078201	Stay Failure:  0.7273871449696576
+Channel 18:	Stay Success:  0.7557142605918112	Stay Failure:  0.726852100707991
+Channel 19:	Stay Success:  0.7514349476646462	Stay Failure:  0.7177689693645148
+Channel 20:	Stay Success:  0.7510055737932564	Stay Failure:  0.7258057727090816
+Channel 21:	Stay Success:  0.7421930144203479	Stay Failure:  0.7123677064204732
+Channel 22:	Stay Success:  0.748157413073204	Stay Failure:  0.71483745008705
+Channel 23:	Stay Success:  0.7558499218706995	Stay Failure:  0.7278671182830303
+Channel 24:	Stay Success:  0.7464234230604814	Stay Failure:  0.7253596682488612
+Channel 25:	Stay Success:  0.7493883319275765	Stay Failure:  0.7143184305827301
+Channel 26:	Stay Success:  0.74553826342091		Stay Failure:  0.7149459301196056
+Channel 27:	Stay Success:  0.7528267908919898	Stay Failure:  0.7256018377062756
+Channel 28:	Stay Success:  0.7499466756191839	Stay Failure:  0.7173732652484326
+Channel 29:	Stay Success:  0.7424707627797658	Stay Failure:  0.7278033349924953
+Channel 30:	Stay Success:  0.7430569055971904	Stay Failure:  0.7173788647757536
+Channel 31:	Stay Success:  0.7578364958649193	Stay Failure:  0.7190877027149911
+
+Results:
+
+Runtime: 237 Seconds
+
+Channel 10: 113
+Channel 31: 91
+Channel 19: 58
+Channel 28: 50
+Channel 25: 47
+Channel 22: 47
+Channel 12: 43
+Channel 13: 39
+Channel 26: 37
+Channel 18: 33
+Channel 6: 32
+Channel 20: 28
+Channel 9: 26
+Channel 11: 26
+Channel 0: 26
+Channel 21: 25
+Channel 23: 24
+Channel 8: 22
+Channel 15: 22
+Channel 1: 22
+Channel 30: 21
+Channel 2: 19
+Channel 17: 19
+Channel 4: 18
+Channel 27: 18
+Channel 7: 17
+Channel 24: 16
+Channel 3: 14
+Channel 16: 14
+Channel 14: 13
+Channel 29: 12
+Channel 5: 8
+
+This test showed that when given more trials, the algorithms decision will come result in a 
+Larger spread, before the best channel was only selected 47 times out of 1000, this time the
+best channel was selected 113 times. 
+
+TOP 3 SS AVG = 0.755238877633696
+BOT 3 SS AVG = 0.74318743596502
+DIFF: Top 3 + 0.012051441668676
+
+TOP 3 SF AVG = 0.717296894588582
+BOT 3 SF AVG = 0.724418148518033
+DIFF: Top 3 - 0.007121253929451
+
+Overall, the algorithm clearly is able to differentiate these channels to some degree even
+when the probabilities on each of the channels failure and success rate is so close together

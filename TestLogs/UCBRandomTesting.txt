@@ -1,0 +1,81 @@
+November 23, 2020
+
+Jeremy Dalglish
+
+Testing the Upper Confidence Bound Algorithm on a random 32 Channel environment for accuracy and consistency. I expect the algorithm to perform very well on a set of channels that is randomly generated due to the wide spread of probabilities between the channels. Each run has been limited to 3200 trials
+
+Random Seed: 20
+
+-----------------------------Channel Probabilities------------------------------
+
+Channel 0:	Stay Success:  0.7320427537419555	Stay Failure:  0.20600366582289698
+Channel 1:	Stay Success:  0.7938483742301582	Stay Failure:  0.1630765589278791
+Channel 2:	Stay Success:  0.15501780258230335	Stay Failure:  0.25843297620498873
+Channel 3:	Stay Success:  0.44300168833923603	Stay Failure:  0.524555252906471
+Channel 4:	Stay Success:  0.06303376508739822	Stay Failure:  0.9912536359228182
+Channel 5:	Stay Success:  0.808309586355286	Stay Failure:  0.5054464768113237
+Channel 6:	Stay Success:  0.3771370759493283	Stay Failure:  0.22429221338735394
+Channel 7:	Stay Success:  0.7160117424846766	Stay Failure:  0.2918985086396293
+Channel 8:	Stay Success:  0.43966640204043006	Stay Failure:  0.24594020212688916
+Channel 9:	Stay Success:  0.8019261763450735	Stay Failure:  0.41490751722330343
+Channel 10:	Stay Success:  0.5400203696553095	Stay Failure:  0.6712936195968411
+Channel 11:	Stay Success:  0.640836082775061	Stay Failure:  0.2533548344586676
+Channel 12:	Stay Success:  0.6970482871885134	Stay Failure:  0.20130206731664047
+Channel 13:	Stay Success:  0.06635285214215003	Stay Failure:  0.15669735481836433
+Channel 14:	Stay Success:  0.8160148358417649	Stay Failure:  0.6208485384141875
+Channel 15:	Stay Success:  0.24110060493496677	Stay Failure:  0.17415731710803772
+Channel 16:	Stay Success:  0.16719024826942075	Stay Failure:  0.9293452029531375
+Channel 17:	Stay Success:  0.8817935990546915	Stay Failure:  0.5735479317626607
+Channel 18:	Stay Success:  0.24346992971073822	Stay Failure:  0.5843441506009959
+Channel 19:	Stay Success:  0.6697546800387808	Stay Failure:  0.5604096389158829
+Channel 20:	Stay Success:  0.4460283857567635	Stay Failure:  0.456826965371142
+Channel 21:	Stay Success:  0.284649386067244	Stay Failure:  0.8669211833514473
+Channel 22:	Stay Success:  0.7198643131613627	Stay Failure:  0.24624985949097555
+Channel 23:	Stay Success:  0.6876869572623906	Stay Failure:  0.17008866724133886
+Channel 24:	Stay Success:  0.21519490748381187	Stay Failure:  0.7840864179632276
+Channel 25:	Stay Success:  0.25026601957262173	Stay Failure:  0.6200049161396234
+Channel 26:	Stay Success:  0.28600942336752877	Stay Failure:  0.8665230486276799
+Channel 27:	Stay Success:  0.07501932604577233	Stay Failure:  0.11151030178980115
+Channel 28:	Stay Success:  0.6536933445033247	Stay Failure:  1.2701780961321685E-4
+Channel 29:	Stay Success:  0.3884383147221714	Stay Failure:  0.31637538177731706
+Channel 30:	Stay Success:  0.36148582154591635	Stay Failure:  0.7187204242212143
+Channel 31:	Stay Success:  0.19773535128745034	Stay Failure:  0.9081650577955674
+
+Results:
+
+Runtime: 192 Seconds
+
+Channel 1: 584
+Channel 17: 338
+Channel 9: 29
+Channel 0: 23
+Channel 5: 15
+Channel 28: 5
+Channel 22: 3
+Channel 7: 1
+Channel 14: 1
+Channel 12: 1
+Channel 8: 0
+Channel 6: 0
+Channel 4: 0
+Channel 31: 0
+Channel 30: 0
+Channel 3: 0
+Channel 29: 0
+Channel 27: 0
+Channel 26: 0
+Channel 25: 0
+Channel 24: 0
+Channel 23: 0
+Channel 21: 0
+Channel 20: 0
+Channel 2: 0
+Channel 19: 0
+Channel 18: 0
+Channel 16: 0
+Channel 15: 0
+Channel 13: 0
+Channel 11: 0
+Channel 10: 0
+
+Here we see that the algorithm was able to hone in on two main channels that it would frequently select as the best channels, we see that Channel 17 had a higher SS rate, but with that a higher SF rate, and with Channel 1 we see that it had a lower SS rate than 17, but a much lower SF rate. These two channels were clearly determined to be the best by the algorithm, and we can see that the algorithm never chooses the worst of the channels, which is ideal
