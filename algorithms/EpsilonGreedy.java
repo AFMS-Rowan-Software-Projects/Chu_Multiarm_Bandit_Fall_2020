@@ -25,9 +25,9 @@ public class EpsilonGreedy extends DecisionMaker{
         @Override
         public int compareTo(Pair c){
             if (this.probability>c.probability)
-                return 1;
-            else if (this.probability<c.probability)
                 return -1;
+            else if (this.probability<c.probability)
+                return 1;
             else   
                 return 0;
         }
