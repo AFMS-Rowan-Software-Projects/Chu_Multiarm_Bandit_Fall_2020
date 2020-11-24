@@ -79,7 +79,7 @@ public class EpsilonGreedy extends DecisionMaker{
         SUBSETSIZE = (int) 0.2*network.size();
 
         subsetManager = new PriorityQueue<>();
-        this.currChannel = 0
+        this.currChannel = 0;
        
     }
 
@@ -121,7 +121,7 @@ public class EpsilonGreedy extends DecisionMaker{
                 
         }
 
-        return true;
+        return success;
     }
 
     public Object[] getResults(){
