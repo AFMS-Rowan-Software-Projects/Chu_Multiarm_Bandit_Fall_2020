@@ -57,4 +57,4 @@ fi
 echo
 
 #Print Sorted Results
-sort -r -k 3,3 LogFiles/batchResults.txt
+sort -r -nk 3,3 LogFiles/batchResults.txt
