@@ -94,7 +94,7 @@ public class EpsilonGreedy extends DecisionMaker{
             success = network.pingChannel(currChannel);
             pingTracker[currChannel]++;
             successes[currChannel] += (success? 1:0);
-            assumedProbabilities[currChannel] = (double) pingTracker[currChannel]/successes[currChannel];
+            assumedProbabilities[currChannel] = (double) successes[currChannel]/pingTracker[currChannel];
             subsetManager.add(new Pair(currChannel, assumedProbabilities[currChannel]));
             currChannel++;
         }
@@ -107,7 +107,7 @@ public class EpsilonGreedy extends DecisionMaker{
                 success = network.pingChannel(currChannel);
                 pingTracker[currChannel]++;
                 successes[currChannel] += (success? 1:0);
-                assumedProbabilities[currChannel] = (double) pingTracker[currChannel]/successes[currChannel];
+                assumedProbabilities[currChannel] = (double) successes[currChannel]/pingChannel[currChannel];
                 subsetManager.add(new Pair(currChannel, assumedProbabilities[currChannel]));
             }
             else {
@@ -115,7 +115,7 @@ public class EpsilonGreedy extends DecisionMaker{
                 success = network.pingChannel(currChannel);
                 pingTracker[currChannel]++;
                 successes[currChannel] += (success? 1:0);
-                assumedProbabilities[currChannel] = (double) pingTracker[currChannel]/successes[currChannel];
+                assumedProbabilities[currChannel] = (double) successes[currChannel]/pingTracker[currChannel];
                 subsetManager.add(new Pair(currChannel, assumedProbabilities[currChannel]));
 
             }
