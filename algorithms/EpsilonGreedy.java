@@ -54,69 +54,72 @@ public class EpsilonGreedy extends DecisionMaker{
         }
     }
 
-    private final int INITIALIZATION_FACTOR = 5;
     private final double EPSILON = 0.05;
-    private final double NUMCHANCES = 10000;
     private final int SUBSETSIZE;
 
     protected NetworkManager network;
 
     private double[] assumedProbabilities;
     private int[] pingTracker;
+    private int[] successes;
+    
+    private int currChannel;
 
     private PriorityQueue<Pair> subsetManager;
 
     public EpsilonGreedy(NetworkManager network){
         super(network);
-
         this.network = network;
 
         assumedProbabilities = new double[network.size()];
         pingTracker = new int[network.size()];
+        successes = new int[network.size()];
 
         SUBSETSIZE = (int) 0.2*network.size();
 
         subsetManager = new PriorityQueue<>();
-        initializeProbabilities();
+        this.currChannel = 0
        
     }
 
-    /**
-     * First pass to initialize probabilities.
-     */
-    private void initializeProbabilities(){
-        int size = network.size();
-        for (int i = 0; i<size; i++){
-            int successes = 0;
-            for (int j = 0; j<INITIALIZATION_FACTOR; j++){
-                if (network.pingChannel(i)){
-                    successes++;
-                }
-            }
-            assumedProbabilities[i] = (double) successes/INITIALIZATION_FACTOR;
-            pingTracker[i] = INITIALIZATION_FACTOR;
-            subsetManager.add(new Pair(i, assumedProbabilities[i]));
-        }
-    }
 
 
     /**
      * Exploitation/Exploration loop.
      */
     public boolean pingChannel(){
-
-        for (int i = 0; i <= NUMCHANCES; i++){
-            int randomChannel = (int) Math.random() * (network.size() + 1);  
-            double greed = Math.random();
-            if (greed< 1-EPSILON){//Exploration!
-                subsetManager.remove(new Pair(randomChannel, assumedProbabilities[randomChannel]));
-                boolean channelUpdater = network.pingChannel(randomChannel);
-                assumedProbabilities[randomChannel] = ((assumedProbabilities[randomChannel]*pingTracker[randomChannel]) 
-                                                        + (channelUpdater?1:0))/pingTracker[++randomChannel];
-                subsetManager.add(new Pair(randomChannel, assumedProbabilities[randomChannel]));
-            }
-            //Else exploitation
+        boolean success;
+        if (currChannel < network.size()){
+            success = network.pingChannel(currChannel);
+            pingTracker[currChannel]++;
+            successes[currChannel] += (success? 1:0);
+            assumedProbabilities[currChannel] = (double) pingTracker[currChannel]/successes[currChannel];
+            subsetManager.add(new Pair(currChannel, assumedProbabilities[currChannel]));
+            currChannel++;
         }
+        else {
+            double greed = Math.random();
+            if (greed < 1 - EPSILON){
+                currChannel = (int) Math.random() * network.size();
+                subsetManager.remove(new Pair(currChannel, assumedProbabilities[currChannel]));
+                success = network.pingChannel(randomChannel);
+                pingTracker[currChannel]++;
+                successes[currChannel] += (success? 1:0);
+                assumedProbabilities[currChannel] = (double) pingTracker[currChannel]/successes[currChannel];
+                subsetManager.add(new Pair(currChannel, assumedProbabilities[currChannel]));
+            }
+            else {
+                subsetManager.remove(new Pair(currChannel, assumedProbabilities[currChannel]));
+                success = network.pingChannel(randomChannel);
+                pingTracker[currChannel]++;
+                successes[currChannel] += (success? 1:0);
+                assumedProbabilities[currChannel] = (double) pingTracker[currChannel]/successes[currChannel];
+                subsetManager.add(new Pair(currChannel, assumedProbabilities[currChannel]));
+
+            }
+                
+        }
+
         return true;
     }
 
