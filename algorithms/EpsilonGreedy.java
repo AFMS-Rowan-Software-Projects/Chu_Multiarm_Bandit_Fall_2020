@@ -99,6 +99,7 @@ public class EpsilonGreedy extends DecisionMaker{
             currChannel++;
         }
         else {
+            currChannel = subsetManager.peek().channel;
             double greed = Math.random();
             if (greed < 1 - EPSILON){
                 currChannel = (int) Math.random() * network.size();
