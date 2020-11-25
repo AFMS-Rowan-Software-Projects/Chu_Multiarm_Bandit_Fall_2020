@@ -1,0 +1,39 @@
+November 25, 2020
+
+Jeremy Dalglish
+
+Testing the Epsilon Greedy Algorithm against the Brute Force algorithm, within a 
+controlled environment in which the channels all have the same stay failure rate, but only 
+slightly different rates of stay success rate. This set of channels was run across both 
+algorithms 1000 times in order to gauge how often each algorithm selected the best channels, 
+or close to the best channel
+
+Rigged 10 Channel environment, ran for 1000 Trials
+
+Channel 0:	Stay Success:  0.46	Stay Failure:  0.5
+Channel 1:	Stay Success:  0.47	Stay Failure:  0.5
+Channel 2:	Stay Success:  0.48	Stay Failure:  0.5
+Channel 3:	Stay Success:  0.49	Stay Failure:  0.5
+Channel 4:	Stay Success:  0.50	Stay Failure:  0.5
+Channel 5:	Stay Success:  0.51	Stay Failure:  0.5
+Channel 6:	Stay Success:  0.52	Stay Failure:  0.5
+Channel 7:	Stay Success:  0.53	Stay Failure:  0.5
+Channel 8:	Stay Success:  0.54	Stay Failure:  0.5
+Channel 9:	Stay Success:  0.55	Stay Failure:  0.5
+
+Results:
+Numbers next to Channel #: are out times chosen out of 1000 runs
+
+			Epsilon Greedy		Brute Force Algo			
+Channel 9: 			1			192			
+Channel 8: 			4			153	
+Channel 7: 			6			127	
+Channel 6: 			11			111	
+Channel 5: 			19			105	
+Channel 4: 			32			89	
+Channel 3: 			83			80	
+Channel 2: 			145			60
+Channel 1: 			253			43
+Channel 0:			446			40
+
+Epsilon Greedy seems to heavily favor the first few channels within a set, which is very problematic considering it wasn’t even close to identifying the correct best channel.

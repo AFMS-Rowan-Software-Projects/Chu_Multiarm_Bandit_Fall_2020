@@ -1,0 +1,39 @@
+November 25, 2020
+
+Jeremy Dalglish
+
+Testing the Thompson Sampling Algorithm against the Brute Force algorithm, within a 
+controlled environment in which the channels all have the same stay failure rate, but only 
+slightly different rates of stay success rate. This set of channels was run across both 
+algorithms 1000 times in order to gauge how often each algorithm selected the best channels, 
+or close to the best channel
+
+Rigged 10 Channel environment, ran for 1000 Trials
+
+Channel 0:	Stay Success:  0.46	Stay Failure:  0.5
+Channel 1:	Stay Success:  0.47	Stay Failure:  0.5
+Channel 2:	Stay Success:  0.48	Stay Failure:  0.5
+Channel 3:	Stay Success:  0.49	Stay Failure:  0.5
+Channel 4:	Stay Success:  0.50	Stay Failure:  0.5
+Channel 5:	Stay Success:  0.51	Stay Failure:  0.5
+Channel 6:	Stay Success:  0.52	Stay Failure:  0.5
+Channel 7:	Stay Success:  0.53	Stay Failure:  0.5
+Channel 8:	Stay Success:  0.54	Stay Failure:  0.5
+Channel 9:	Stay Success:  0.55	Stay Failure:  0.5
+
+Results:
+Numbers next to Channel #: are out times chosen out of 1000 runs
+
+			Thompson Sampling	Brute Force Algo			
+Channel 9: 			212			173		
+Channel 8: 			174			171	
+Channel 7: 			152			150	
+Channel 6: 			124			98	
+Channel 5: 			89			92	
+Channel 4: 			87			90	
+Channel 3: 			50			71	
+Channel 2: 			50			63
+Channel 1: 			41			53
+Channel 0:			21			39
+
+Here we see that the Thompson Sampling algorithm performed slightly better than the Brute Force Algorithm during this test. I believe that due to constraining the Thompson Sampling Algorithm to the same number of trials as the Brute Force Algorithm I may have slightly hindered its ability because the Thompson Sampling Algorithm becomes much more accurate as time goes on. Overall, the Thompson Sampling Algorithm did still outperform the Brute Force Algorithm when ran with the same number of trials which is a good thing. For this controlled Environment Test, out of the 3 algorithms UCB performed the best, Thompson Sampling came in second, and Epsilon Greedy was the worst out of the 3.
