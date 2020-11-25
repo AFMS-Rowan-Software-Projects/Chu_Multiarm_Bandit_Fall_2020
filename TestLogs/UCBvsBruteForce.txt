@@ -8,7 +8,7 @@ slightly different rates of stay success rate. This set of channelswas ran acros
 algorithms 1000 times in order to gauge how often each algorithm selected the best channels, 
 or close to the best channel
 
-Rigged 10 Channel environment, ran for 100 Trials
+Rigged 10 Channel environment, ran for 1000 Trials
 
 Channel 0:	Stay Success:  0.46	Stay Failure:  0.5
 Channel 1:	Stay Success:  0.47	Stay Failure:  0.5
