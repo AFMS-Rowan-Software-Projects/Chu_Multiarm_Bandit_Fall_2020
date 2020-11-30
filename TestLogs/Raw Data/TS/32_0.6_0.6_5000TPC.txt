@@ -1,0 +1,70 @@
+
+-----------------------------Channel Probabilities------------------------------
+
+Channel 0:	Stay Success:  0.5983644900892168	Stay Failure:  0.6013777891903948
+Channel 1:	Stay Success:  0.5986490002968751	Stay Failure:  0.6049809317295163
+Channel 2:	Stay Success:  0.5983680496339118	Stay Failure:  0.6067829908378702
+Channel 3:	Stay Success:  0.60276466993574	Stay Failure:  0.5934663418481373
+Channel 4:	Stay Success:  0.6073324518528826	Stay Failure:  0.60655562002036
+Channel 5:	Stay Success:  0.593105298209506	Stay Failure:  0.593193219472197
+Channel 6:	Stay Success:  0.595073920622034	Stay Failure:  0.6014119194284903
+Channel 7:	Stay Success:  0.603167009953971	Stay Failure:  0.6065318633703691
+Channel 8:	Stay Success:  0.6037553937128495	Stay Failure:  0.5972862289154391
+Channel 9:	Stay Success:  0.6015571788336217	Stay Failure:  0.6041303006134835
+Channel 10:	Stay Success:  0.6012673291686612	Stay Failure:  0.592643661311818
+Channel 11:	Stay Success:  0.5919924860693451	Stay Failure:  0.59640314335338
+Channel 12:	Stay Success:  0.5930322572210505	Stay Failure:  0.5936996973769214
+Channel 13:	Stay Success:  0.5984843265611316	Stay Failure:  0.5968577628301889
+Channel 14:	Stay Success:  0.5933402501131121	Stay Failure:  0.592538508128388
+Channel 15:	Stay Success:  0.6004836831066029	Stay Failure:  0.6025931973452181
+Channel 16:	Stay Success:  0.6054790464247576	Stay Failure:  0.6043838105410075
+Channel 17:	Stay Success:  0.5932438321406014	Stay Failure:  0.6001836162992221
+Channel 18:	Stay Success:  0.6065291569234398	Stay Failure:  0.6024522925118473
+Channel 19:	Stay Success:  0.5963140353861135	Stay Failure:  0.5962443782534498
+Channel 20:	Stay Success:  0.6043712268181171	Stay Failure:  0.600332166131071
+Channel 21:	Stay Success:  0.6021720359534709	Stay Failure:  0.6001463449281573
+Channel 22:	Stay Success:  0.6069445162223137	Stay Failure:  0.6015429961034773
+Channel 23:	Stay Success:  0.607039485048117	Stay Failure:  0.6026997694507775
+Channel 24:	Stay Success:  0.5931494048104784	Stay Failure:  0.6015416077839365
+Channel 25:	Stay Success:  0.5982049154945565	Stay Failure:  0.59191015688525
+Channel 26:	Stay Success:  0.5995067219730157	Stay Failure:  0.6052923133614351
+Channel 27:	Stay Success:  0.5974736334645857	Stay Failure:  0.5961031320050276
+Channel 28:	Stay Success:  0.5943356402024677	Stay Failure:  0.5925594829954262
+Channel 29:	Stay Success:  0.6053315468004332	Stay Failure:  0.6027739911373705
+Channel 30:	Stay Success:  0.5990106833734329	Stay Failure:  0.6062675601106153
+Channel 31:	Stay Success:  0.5973608390152841	Stay Failure:  0.5983926027907348
+
+--------------------------------------------------------------------------------
+
+Channel 3: 161
+Channel 10: 114
+Channel 8: 80
+Channel 25: 76
+Channel 22: 60
+Channel 23: 55
+Channel 20: 54
+Channel 18: 50
+Channel 29: 35
+Channel 21: 35
+Channel 16: 29
+Channel 13: 28
+Channel 28: 27
+Channel 27: 24
+Channel 4: 22
+Channel 14: 18
+Channel 19: 17
+Channel 12: 15
+Channel 5: 12
+Channel 31: 12
+Channel 9: 11
+Channel 0: 11
+Channel 15: 10
+Channel 6: 8
+Channel 7: 7
+Channel 11: 7
+Channel 2: 5
+Channel 17: 5
+Channel 1: 5
+Channel 26: 4
+Channel 24: 3
+Channel 30: 0
