@@ -1,0 +1,38 @@
+Jeremy Dalglish
+
+November 30, 2020
+
+Going into to the testing of the 3 different algorithms (Upper Confidence Bound, Epsilon Greedy, and Thompson
+Sampling) I was unsure of which one was going to perform the best overall, and also unsure of which ones would
+perform better based upon the situation in which they were tested in. Here are my conclusions.
+
+Overall, when we consider the time to run an algorithm as well as its accuracy I think that Upper Confidence Bound 
+performs the best. The most accurate algorithm is definitely the Thompson Sampling algorithm, but due to its increased
+use of various resources it takes a much longer time to run than the other two algorithms, and it is not by a small margin either
+
+LimitTesting2 runs show that the UCB took 237 seconds to run 32000 trials of the program 1000 times, whereas the Thompson sampling
+algorithm took a whopping 899 seconds (almost 15 minutes) to complete the same number of runs with the same number of trials, and
+both algorithms came to very similar conclusions in which were the best channels, so personally I don't think the extra 11 minutes is
+worth the marginally improved results.
+
+Epsilon Greedy performed much worse than I would have predicted during the Limit Testing Trials, it almost always identified the first 
+few channels it encountered as the best channels within the subset, even when there were 25+ more channels to explore, it never seemed
+to deviate from the initial few that it selected, and overall the algorithm does a poor job of identifying the correct top channel.
+If we look at the EGvsBruteForce testfile we see that the Brute Force algorithm outperformed the epsilon greedy by a large margin due to
+the fact that the slightly worse channels appeared first within the network and the Epsilon Greedy algorithm never deviated from that.
+
+In conclusion, I think that the Upper Confidence Bound algorithm is the optimal algorithm to use in most circumstances, it runs much
+faster than the Thompson Sampling algorithm, for just marginally less results, but in the time you save you could run twice the Trials
+on the Upper Confidence Bound algorithm to improve its accuracy and still save time.
+
+Within the Raw Data folder there are more test logs without written observation, there are 9 files each for EG and UCB testing the
+the algorithms on the same subset, there are 3 files missing from the TS folder due to the amount of time it would take to run the tests.
+
+If we were to run the 3 files that were missing here are the estimates for how long it would take
+
+'java Driver -a 3 -t 320000 -s 1 -v -f testingcsvs/64_0.85_0.8' would take roughly 2.5 hours
+
+'java Driver -a 3 -t 1024000 -s 1 -v -f testingcsvs/1024_0.85_0.8' would take over 4 days (Run didn't complete after 7 minutes, UCB took 7 seconds)
+
+'java Driver -a 3 -t 320000 -s 1 -v -f testingcsvs/64_0.7_0.68' would also take roughly 2.5 hours
+
