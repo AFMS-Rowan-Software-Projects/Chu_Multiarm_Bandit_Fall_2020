@@ -2,6 +2,8 @@ Jeremy Dalglish
 
 November 30, 2020
 
+!!Epsilon Greedy Testing will be updated following adjustments to the algorithm
+
 Going into to the testing of the 3 different algorithms (Upper Confidence Bound, Epsilon Greedy, and Thompson
 Sampling) I was unsure of which one was going to perform the best overall, and also unsure of which ones would
 perform better based upon the situation in which they were tested in. Here are my conclusions.
