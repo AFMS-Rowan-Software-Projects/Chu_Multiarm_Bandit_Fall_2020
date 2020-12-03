@@ -102,7 +102,7 @@ public class EpsilonGreedy extends DecisionMaker{
             currChannel = subsetManager.peek().channel;
             double greed = Math.random();
             if (greed < 1 - EPSILON){
-                currChannel = (int) Math.random() * network.size();
+                currChannel = (int) Math.random() * (network.size() + 1);  
                 subsetManager.remove(new Pair(currChannel, assumedProbabilities[currChannel]));
                 success = network.pingChannel(currChannel);
                 pingTracker[currChannel]++;
