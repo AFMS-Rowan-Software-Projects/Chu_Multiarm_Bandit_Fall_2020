@@ -1,0 +1,23 @@
+
+-----------------------------Channel Probabilities------------------------------
+
+Channel 0:      Stay Success:  0.20102  Stay Failure:  0.82013
+Channel 1:      Stay Success:  0.22345  Stay Failure:  0.76163
+Channel 2:      Stay Success:  0.81261  Stay Failure:  0.35058
+Channel 3:      Stay Success:  0.94718  Stay Failure:  0.21103
+Channel 4:      Stay Success:  0.12638  Stay Failure:  0.13217
+Channel 5:      Stay Success:  0.31873  Stay Failure:  0.23764
+Channel 6:      Stay Success:  0.95883  Stay Failure:  0.89123
+Channel 7:      Stay Success:  0.11759  Stay Failure:  0.43953
+Channel 8:      Stay Success:  0.04021  Stay Failure:  0.03042
+Channel 9:      Stay Success:  0.96842  Stay Failure:  0.12143
+Channel 10:     Stay Success:  0.31642  Stay Failure:  0.48234
+Channel 11:     Stay Success:  0.44841  Stay Failure:  0.52876
+Channel 12:     Stay Success:  0.90127  Stay Failure:  0.99621
+Channel 13:     Stay Success:  0.39263  Stay Failure:  0.63782
+Channel 14:     Stay Success:  0.77231  Stay Failure:  0.51788
+Channel 15:     Stay Success:  0.06325  Stay Failure:  0.64912
+
+--------------------------------------------------------------------------------
+
+
