@@ -1,48 +1,35 @@
+//UNCLASSIFIED
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.util.Random;
 import java.util.Scanner;
 
+
+// TEMPORARY DRIVER, ONLY USING FOR TESTING REWORKED CODE
 public class Driver {
-
-	private static Scanner sc = new Scanner(System.in);
-
-
-	//Declare static variables to be used in markov chain algorithms
-	private static ChannelTester tester; 
-	private static DecisionMaker dm;
-	private static Channel[] simulatedNetwork;
+	
+	private static ArgsManager argumentManager;
+	
 	public static void main(String[] args)
 	{
-		/* 
-		 * Generates Network Based off User Input
-		 */
-		tester = new ChannelTester();
-		System.out.print("Generate Channels Based On a Random Seed? (true/false): ");
-		boolean randomGeneration = sc.nextBoolean();
-		simulatedNetwork = tester.makeChannels(randomGeneration);
-
-		dm = new DecisionMaker(simulatedNetwork);
-		
-		
-		// Present only for debug, prints out network after it is generated.
-		
-		
-		// Sets number of channels to ping over the trial.
-		System.out.print("Enter number of trials: ");
-		int numTrials = sc.nextInt();
-		int bestChannel = dm.bruteForce(100, numTrials);
-
-		System.out.println("Best Channel: " + bestChannel);
-
-		
-		
-		/* Naive / Brute Force Algorithm
-		 * Communicates over each channel pingsPerChannel times, performs rest of pings on the channel with the highest 
-		 * success rate.
-		 */
-		
-		// Brute Force Algorithm Record Keeping
-		
-		
+		try
+		{
+			argumentManager = new ArgsManager(args);
+			System.out.println(argumentManager.processArguments());
+		}catch(InvalidArgumentException e)
+		{
+			System.out.println(e);
+		}catch(IOException e)
+		{
+			System.out.println("There was a file exception. Make sure files supplied actually exist and try again.");
+		}catch(Exception e)
+		{
+			System.err.println("Unexpected error encountered: here is the stack trace: ");
+			e.printStackTrace();
+		}
 	}
-
 }
+
